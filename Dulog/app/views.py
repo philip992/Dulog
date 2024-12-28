@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Post
+from .models import Report
 from django.urls import reverse_lazy
 
 class HomePageView(TemplateView):
@@ -13,31 +13,36 @@ class AnimalPageView(TemplateView):
 class ReportStrayPageView(TemplateView):
     template_name = 'app/stray.html'
 
-class DonationPageView(TemplateView):
-    template_name = 'app/donation.html'
+class ReportStrayListView(ListView):
+    model = Report
+    template_name = 'app/ReportStray_list.html'
+    context_object_name = 'reports'
+
+class ReportStrayDetailView(DetailView):
+    model = Report
+    template_name = 'app/ReportStray_detail.html'
+    context_object_name = 'report'
+
+class ReportStrayCreateView(CreateView):
+    model = Report
+    fields = ['species', 'image', 'location', 'description', 'reporter_name', 'reporter_contact', 'status']
+    template_name = 'app/ReportStray_create.html'
+    success_url = reverse_lazy('stray_list')
+
+class ReportStrayUpdateView(UpdateView):
+    model = Report
+    fields = ['species', 'image', 'location', 'description', 'reporter_name', 'reporter_contact', 'status']
+    template_name = 'app/ReportStray_update.html'
+
+    def get_success_url(self):
+        
+        return reverse_lazy('stray_detail', kwargs={'pk': self.object.pk})
+    
+class ReportStrayDeleteView(DeleteView):
+    model = Report
+    template_name = 'app/ReportStray_delete.html'
+    success_url = reverse_lazy('stray_list')
+
+    
 
 
-class BlogListView(ListView):
-    model = Post
-    context_object_name = 'post_list'
-    template_name = 'app/blog_list.html'
-
-class BlogDetailView(DetailView):
-    model = Post
-    context_object_name = 'post'
-    template_name = 'app/blog_detail.html'
-
-class BlogCreateView(CreateView):
-    model = Post
-    fields = ['title', 'author', 'body']
-    template_name = 'app/blog_create.html'
-
-class BlogUpdateView(UpdateView):
-    model = Post
-    fields = ['title', 'author', 'body']
-    template_name = 'app/blog_update.html'
-
-class BlogDeleteView(DeleteView):
-    model = Post
-    template_name = 'app/blog_delete.html'
-    success_url = reverse_lazy('blog')

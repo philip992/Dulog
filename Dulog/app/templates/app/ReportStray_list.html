@@ -1,0 +1,12 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<a href="{% url 'stray_create' %}">File a Report</a>
+    {% for report in reports %}
+    <div class="report-list">
+        <h2><a href="{% url 'stray_detail' report.pk %}">{{ report.reporter_name }}</a></h2> 
+        <p>Date: {{ report.report_date|date:"F j, Y, H:i" }} | Status: {{ report.get_status_display }}</p> 
+    </div>
+    {% endfor %}
+{% endblock content %}

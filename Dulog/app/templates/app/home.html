@@ -2,7 +2,16 @@
 {% load static %}
 
 {% block content %}
-    <div class="bg-home">
-        <h1 class="hom">Yo</h1>
+<body>
+    <div class="container bg-home">
+        <h1>Welcome to the Munting Bahay</h1>
+        <p>Join us in our mission to help homeless animals find a loving home.</p>
+        <p>Here you can report stray animals and view available animals for adoption.</p>
+        
+        <div>
+            <a href="{% url 'report_stray' %}" class="button">Report a Stray Animal</a>
+            <a href="{% url 'animal' %}" class="button">View Available Animals</a>
+        </div>
     </div>
+</body>
 {% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="report-entry">
+        <h2>{{ report.reporter_name }}</h2>
+        <p>Species: {{ report.get_species_display }}</p>
+        <p>Date: {{ report.report_date|date:"F j, Y, H:i" }} | Status: {{ report.get_status_display }}</p>
+        <p>Location: {{ report.location }}</p>
+        <p>Description: {{ report.description }}</p>
+        
+        {% if report.image %}
+            <div class="report-image">
+                <img src="{{ report.image.url }}" alt="Report Image" style="max-width: 100%; height: auto;">
+            </div>
+        {% endif %}
+    </div>
+    <a href="{% url 'stray_update' object.pk %}">Edit Report</a>
+    <a href="{% url 'stray_delete' object.pk %}">Delete Report</a>
+{% endblock content %}
