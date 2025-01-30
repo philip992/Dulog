@@ -6,7 +6,7 @@ from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from .views import (HomePageView, AnimalPageView, ReportStrayPageView, ReportStrayListView, 
                     ReportStrayDetailView, ReportStrayCreateView, ReportStrayUpdateView, ReportStrayDeleteView,
-                    StrayAnimalDetailView, SignupView)  # Added SignupView import
+                    StrayAnimalDetailView, SignupView) 
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
