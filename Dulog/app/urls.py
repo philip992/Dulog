@@ -6,7 +6,7 @@ from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from .views import (HomePageView, AnimalPageView, ReportStrayPageView, ReportStrayListView, 
                     ReportStrayDetailView, ReportStrayCreateView, ReportStrayUpdateView, ReportStrayDeleteView,
-                    StrayAnimalDetailView)  # Import StrayAnimalDetailView
+                    StrayAnimalDetailView, SignupView)  # Added SignupView import
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
@@ -21,8 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
-
-
-
-
+    path('accounts/signup/', SignupView.as_view(), name='signup'), 
+     
+      
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
