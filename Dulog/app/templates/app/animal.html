@@ -1,5 +1,70 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-    <h1 class="ani">Yooooo</h1>
+    <div class="flex items-center justify-center py-4 md:py-8 flex-wrap">
+        <button id="allBtn" type="button" class="text-blue-700 border border-blue-600 bg-white focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 dark:border-blue-500 dark:text-blue-500 dark:bg-gray-900 dark:focus:ring-blue-800">All Categories</button>
+        <button id="catsBtn" type="button" class="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 dark:text-white dark:focus:ring-gray-800">Cats</button>
+        <button id="dogsBtn" type="button" class="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 dark:text-white dark:focus:ring-gray-800">Dogs</button>
+    </div>
+
+    <div id="imageGallery" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div data-category="cat">
+            <a href="/static/images/cat111.jpg" target="_blank">
+                <img class="h-auto max-w-full rounded-lg" src="/static/images/cat111.jpg" alt="Cat Image 1">
+            </a>
+        </div>
+        <div data-category="cat">
+            <a href="/static/images/cat2.jpg" target="_blank">
+                <img class="h-auto max-w-full rounded-lg" src="/static/images/cat2.jpg" alt="Cat Image 2">
+            </a>
+        </div>
+        <div data-category="dog">
+            <a href="/static/images/dog111.jpg" target="_blank">
+                <img class="h-auto max-w-full rounded-lg" src="/static/images/dog111.jpg" alt="Dog Image 3">
+            </a>
+        </div>
+        <div data-category="dog">
+            <a href="/static/images/dog2.jpg" target="_blank">
+                <img class="h-auto max-w-full rounded-lg" src="/static/images/dog2.jpg" alt="Dog Image 4">
+            </a>
+        </div>
+        <div data-category="dog">
+            <a href="/static/images/dog3.jpg" target="_blank">
+                <img class="h-auto max-w-full rounded-lg" src="/static/images/dog3.jpg" alt="Dog Image 5">
+            </a>
+        </div>
+        <div data-category="cat">
+            <a href="/static/images/cat3.jpg" target="_blank">
+                <img class="h-auto max-w-full rounded-lg" src="/static/images/cat3.jpg" alt="Cat Image 6">
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('allBtn').addEventListener('click', function() {
+            filterImages('all');
+        });
+
+        document.getElementById('catsBtn').addEventListener('click', function() {
+            filterImages('cat');
+        });
+
+        document.getElementById('dogsBtn').addEventListener('click', function() {
+            filterImages('dog');
+        });
+
+        function filterImages(category) {
+            const images = document.querySelectorAll('#imageGallery div');
+            
+            images.forEach(image => {
+                if (category === 'all') {
+                    image.style.display = 'block';
+                } else if (image.getAttribute('data-category') === category) {
+                    image.style.display = 'block';
+                } else {
+                    image.style.display = 'none';
+                }
+            });
+        }
+    </script>
 {% endblock content %}

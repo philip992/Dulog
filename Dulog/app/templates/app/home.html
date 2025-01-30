@@ -3,14 +3,25 @@
 
 {% block content %}
 <body>
-    <div class="container bg-home">
-        <h1>Welcome to the Munting Bahay</h1>
-        <p>Join us in our mission to help homeless animals find a loving home.</p>
-        <p>Here you can report stray animals and view available animals for adoption.</p>
+    
+    <div class="container bg-home text-center p-6">
+        {% if user.is_authenticated %}
+        <p>Hello {{user.username}}</p>
+    {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+        <h1 class="text-3xl font-semibold text-gray-900 mb-4">Welcome to the Munting Bahay</h1>
+        <p class="text-lg text-gray-700 mb-6">Join us in our mission to help homeless animals find a loving home.</p>
+        <p class="text-md text-gray-600 mb-8">Here you can report stray animals and view available animals for adoption.</p>
         
-        <div>
-            <a href="{% url 'report_stray' %}" class="button">Report a Stray Animal</a>
-            <a href="{% url 'animal' %}" class="button">View Available Animals</a>
+        <div class="flex justify-center gap-4">
+            <a href="{% url 'stray_create' %}" class="bg-blue-700 text-white font-medium rounded-lg px-6 py-3 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full sm:w-auto text-center">
+                Report a Stray Animal
+            </a>
+            <a href="{% url 'animal' %}" class="bg-green-700 text-white font-medium rounded-lg px-6 py-3 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-full sm:w-auto text-center">
+                View Available Animals
+            </a>
         </div>
     </div>
 </body>

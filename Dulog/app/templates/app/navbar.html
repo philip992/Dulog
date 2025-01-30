@@ -1,24 +1,47 @@
-<nav class="navbar navbar-expand-lg">
-  <div class="container">
-          <a class="navbar-brand" href="#">Logo</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home <i class="fa-solid fa-house"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'animal' %}">Cats and Dogs <i class="fa-solid fa-paw"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'stray_list' %}">Report Stray Animal <i class="fa-solid fa-magnifying-glass-location"></i></a>
-              </li>
-              
-            </ul>
-          </div>
+<nav class="border-gray-200 bg-blue-900 dark:bg-blue-800 dark:border-gray-700">
+  <div class="container max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
+    <a href="{% url 'home' %}" class="flex items-center">
+      <span class="ml-2 text-2xl font-semibold whitespace-nowrap text-white">Munting Bahay</span>
+    </a>
+
+    <button data-collapse-toggle="navbarNav" type="button" class="inline-flex items-center p-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-blue-700 dark:focus:ring-gray-600" aria-controls="navbarNav" aria-expanded="false">
+      <span class="sr-only">Toggle Navigation</span>
+      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+    </button>
+
+    <div class="hidden w-full md:block md:w-auto" id="navbarNav">
+      <ul class="flex flex-col font-medium mt-2 md:space-x-8 md:flex-row md:mt-0">
+        <li>
+          <a href="{% url 'home' %}" class="block py-1 px-2 text-white hover:bg-blue-800 hover:text-gray-200 md:p-0 dark:text-white dark:hover:text-gray-200 dark:hover:bg-blue-700">Home <i class="fa-solid fa-house"></i></a>
+        </li>
+        <li>
+          <a href="{% url 'animal' %}" class="block py-1 px-2 text-white hover:bg-blue-800 hover:text-gray-200 md:p-0 dark:text-white dark:hover:text-gray-200 dark:hover:bg-blue-700">Cats and Dogs <i class="fa-solid fa-paw"></i></a>
+        </li>
+        <li>
+          <a href="{% url 'stray_list' %}" class="block py-1 px-2 text-white hover:bg-blue-800 hover:text-gray-200 md:p-0 dark:text-white dark:hover:text-gray-200 dark:hover:bg-blue-700">Report Stray Animal <i class="fa-solid fa-magnifying-glass-location"></i></a>
+        </li>
+
+        {% if user.is_authenticated %}
+       
+        <li>
+          <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="block py-1 px-2 text-white hover:bg-blue-800 hover:text-gray-200 md:p-0 dark:text-white dark:hover:text-gray-200 dark:hover:bg-blue-700">
+              Logout <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
+          </form>
+        </li>
+        {% else %}
+        
+        <li>
+          <a href="{% url 'login' %}" class="block py-1 px-2 text-white hover:bg-blue-800 hover:text-gray-200 md:p-0 dark:text-white dark:hover:text-gray-200 dark:hover:bg-blue-700">
+            Login <i class="fa-solid fa-right-to-bracket"></i>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
   </div>
 </nav>
-          

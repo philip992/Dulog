@@ -1,0 +1,34 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="max-w-4xl p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 mx-auto">
+        <a href="{% url 'animal' %}" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded text-xs px-4 py-2 mb-6 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Back to Animals List</a>
+        
+        <h2 class="text-3xl font-semibold mb-4 text-gray-900 dark:text-white">{{ animal.species }} - {{ animal.color }}</h2>
+        <p class="mb-3 text-lg font-normal text-gray-700 dark:text-gray-400">Breed: {{ animal.breed }}</p>
+        <p class="mb-3 text-lg font-normal text-gray-700 dark:text-gray-400">Size: {{ animal.get_size_display }}</p>
+        <p class="mb-3 text-lg font-normal text-gray-700 dark:text-gray-400">Health Status: {{ animal.health_status }}</p>
+        <p class="mb-3 text-lg font-normal text-gray-700 dark:text-gray-400">Found Date: {{ animal.found_date|date:"F j, Y" }}</p>
+        <p class="mb-3 text-lg font-normal text-gray-700 dark:text-gray-400">Description: {{ animal.description }}</p>
+
+        {% if animal.image %}
+            <div class="mb-6">
+                <img src="{{ animal.image.url }}" alt="Animal Image" class="w-full rounded-lg shadow-md">
+            </div>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <div class="flex gap-4">
+                <a href="{% url 'stray_update' animal.pk %}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Edit Animal
+                </a>
+                <a href="{% url 'stray_delete' animal.pk %}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                    Delete Animal
+                </a>
+            </div>
+        {% else %}
+            <p class="text-center text-lg text-gray-500">You need to log in to edit or delete the animal report.</p>
+        {% endif %}
+    </div>
+{% endblock content %}

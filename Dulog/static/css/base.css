@@ -16,30 +16,19 @@ html, body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.bg-home{
-    background-image: url('/static/images/dogbg.jpg');
-    background-size: cover;
-    min-height: calc(100vh - 56px);
-    width: 100%;
+.bg-home {
+    background-image: url('/static/images/catdogbg.jpg');
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    min-height: calc(100vh - 56px); /* Takes up the full viewport height */
+    width: 100%; /* Ensures the width spans across the screen */
     margin: 0;
     padding: 50px;
     display: block;
-    
 }
 
 
-h1.hom {
-    text-align: center;
-    margin: 0; 
-    padding-top: 20px; 
-}
 
-.button{
-    background-color: rgba(214, 198, 26, 0.8); 
-    color: black; 
-    padding: 15px 25px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-}
+
+

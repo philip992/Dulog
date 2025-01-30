@@ -1,11 +1,64 @@
 {% extends 'app/base.html' %}
-{% load static %}
 
 {% block content %}
-   <h1>Edit Report</h1>
-   <form action="{% url 'stray_update' object.pk %}" method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="update">
-   </form>
+    
+    <div class="flex justify-center mb-6">
+        <a href="{% url 'stray_detail' object.pk %}" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded text-xs px-4 py-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Back to Report Detail</a>
+    </div>
+
+    <h1 class="text-2xl font-semibold mb-6 text-center text-gray-900 dark:text-white">Edit Report</h1>
+
+    <div class="flex justify-center">
+        <form action="{% url 'stray_update' object.pk %}" method="post" enctype="multipart/form-data" class="w-full md:w-3/4 lg:w-1/2">
+            {% csrf_token %}
+            
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <div>
+                    <label for="species" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Species</label>
+                    <select name="species" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="dog" {% if form.species.value == "dog" %}selected{% endif %}>Dog</option>
+                        <option value="cat" {% if form.species.value == "cat" %}selected{% endif %}>Cat</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+                    <input type="text" name="location" value="{{ form.location.value }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
+                    <input type="file" name="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label for="reporter_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reporter Name</label>
+                    <input type="text" name="reporter_name" value="{{ form.reporter_name.value }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label for="reporter_contact" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reporter Contact</label>
+                    <input type="text" name="reporter_contact" value="{{ form.reporter_contact.value }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                    <textarea name="description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ form.description.value }}</textarea>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                <select name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="pending" {% if form.status.value == "pending" %}selected{% endif %}>Pending</option>
+                    <option value="resolved" {% if form.status.value == "resolved" %}selected{% endif %}>Resolved</option>
+                    <option value="in_progress" {% if form.status.value == "in_progress" %}selected{% endif %}>In Progress</option>
+                </select>
+            </div>
+
+            <div class="flex justify-center">
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
+            </div>
+        </form>
+    </div>
 {% endblock content %}
